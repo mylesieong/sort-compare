@@ -1,22 +1,43 @@
 package com.myles.fun;
 
+import org.joda.time.DateTime;
+
 public class App{
     public static void main( String[] args ){
-        // int[] aa=new int[]{34,23,56,87,654,2,1,46,87,879,3421,45,86,1,1,1,1,1,1};
         int size = args.length>0?Integer.parseInt(args[0]):50;
         int[] aa = new int[size];
         for (int i=0; i<size; i++){
-            // aa[i] = 5;
             aa[i] = (int)Math.round(Math.random()*1000000);  //random a 6 digit number
         }
+        
+        /* Quicksort*/
+        int[] a1=aa.clone();
+        printArray(a1);
+        System.out.println("Start at:" + DateTime.now());
+        quick_sort(a1,0,a1.length - 1);
+        System.out.println("Finish at:" + DateTime.now());
+        printArray(a1);
         printArray(aa);
-        quick_sort(aa,0,aa.length - 1);
-        printArray(aa);
+        
+        
+        
     }
     
     public static void printArray(int[] array) {  
-        System.out.print("{");  
-        for (int i = 0; i < array.length; i++) {  
+        System.out.print("{");
+        //head
+        for (int i = 0; i < 3; i++) {  
+            System.out.print(array[i]);  
+            if (i < array.length - 1) {  
+                System.out.print(", ");  
+            }  
+        }  
+        
+        //middle
+        System.out.print("...(" + array.length + ")...");  
+        
+        //tail
+        for (int i = array.length-3; i < array.length; i++) {  
             System.out.print(array[i]);  
             if (i < array.length - 1) {  
                 System.out.print(", ");  
