@@ -18,13 +18,21 @@ public class App{
         System.out.println("Finish quick sort at:" + DateTime.now());
         printArray(a1);
         
-        /* Quicksort*/
+        /* insertion*/
         int[] a2=aa.clone();
         printArray(a2);
         System.out.println("Start insertion sort at:" + DateTime.now());
         insertion_sort(a2);
         System.out.println("Finish insertion sort at:" + DateTime.now());
         printArray(a2);
+        
+        /* insertion*/
+        int[] a3=aa.clone();
+        printArray(a3);
+        System.out.println("Start insertion sort at:" + DateTime.now());
+        heap(a3);
+        System.out.println("Finish insertion sort at:" + DateTime.now());
+        printArray(a3);
         
     }
     
@@ -87,4 +95,38 @@ public class App{
             }
         }
     }
+    
+    public static void heapify(int a[], int n, int i) {
+		int max, child;
+		child = 2 * i + 1;
+		max = i;
+		if (child < n)
+			if (a[child] > a[max])
+				max = child;
+		if (child + 1 < n)
+			if (a[child + 1] > a[max])
+				max = child + 1;
+		if (max != i) {
+			int temp = a[i];
+			a[i] = a[max];
+			a[max] = temp;
+			heapify(a, n, max);
+		}
+	}
+
+	public static void buildheap(int a[]) {
+		for (int i = a.length / 2 - 1; i >= 0; i--)
+			heapify(a, a.length, i);
+	}
+
+	public static void heap(int a[]) {
+		buildheap(a);
+		for (int i = a.length - 1; i >= 1; i--) {
+			int temp = a[0];
+			a[0] = a[i];
+			a[i] = temp;
+			heapify(a, i, 0);
+		}
+	}
+
 }
