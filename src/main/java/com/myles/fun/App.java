@@ -1,14 +1,14 @@
 package com.myles.fun;
 
-/**
- * Hello world!
- *
- */
-public class App 
-{
+public class App{
     public static void main( String[] args ){
-        System.out.println("Hello World!");
-        int[] aa=new int[]{34,23,56,87,654,2,1,46,87,879,3421,45,86,1,1,1,1,1,1};
+        // int[] aa=new int[]{34,23,56,87,654,2,1,46,87,879,3421,45,86,1,1,1,1,1,1};
+        int size = args.length>0?Integer.parseInt(args[0]):50;
+        int[] aa = new int[size];
+        for (int i=0; i<size; i++){
+            // aa[i] = 5;
+            aa[i] = (int)Math.round(Math.random()*1000000);  //random a 6 digit number
+        }
         printArray(aa);
         quick_sort(aa,0,aa.length - 1);
         printArray(aa);
