@@ -13,13 +13,18 @@ public class App{
         /* Quicksort*/
         int[] a1=aa.clone();
         printArray(a1);
-        System.out.println("Start at:" + DateTime.now());
+        System.out.println("Start quick sort at:" + DateTime.now());
         quick_sort(a1,0,a1.length - 1);
-        System.out.println("Finish at:" + DateTime.now());
+        System.out.println("Finish quick sort at:" + DateTime.now());
         printArray(a1);
-        printArray(aa);
         
-        
+        /* Quicksort*/
+        int[] a2=aa.clone();
+        printArray(a2);
+        System.out.println("Start insertion sort at:" + DateTime.now());
+        insertion_sort(a2);
+        System.out.println("Finish insertion sort at:" + DateTime.now());
+        printArray(a2);
         
     }
     
@@ -69,4 +74,17 @@ public class App{
             quick_sort(s, i + 1, r);  
         }  
     } 
+    
+    public static void insertion_sort(int s[]){
+        int temp;
+        for (int i = 0; i < s.length; i++){
+            for (int j=i; j>0; j--){
+                if (s[j]> s[j-1]){
+                    temp = s[j];
+                    s[j] = s[j-1];
+                    s[j-1] = temp;
+                }
+            }
+        }
+    }
 }
