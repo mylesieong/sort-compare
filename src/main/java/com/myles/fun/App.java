@@ -7,7 +7,7 @@ public class App{
         int size = args.length>0?Integer.parseInt(args[0]):50;
         int[] aa = new int[size];
         for (int i=0; i<size; i++){
-            aa[i] = (int)Math.round(Math.random()*1000000);  //random a 6 digit number
+            aa[i] = (int)Math.round(Math.random()*100000);  //random a 6 digit number
         }
         
         /* Quicksort*/
@@ -19,14 +19,14 @@ public class App{
         printArray(a1);
         
         /* insertion*/
-        int[] a2=aa.clone();
-        printArray(a2);
-        System.out.println("Start insertion sort at:" + DateTime.now());
-        insertion_sort(a2);
-        System.out.println("Finish insertion sort at:" + DateTime.now());
-        printArray(a2);
+        // int[] a2=aa.clone();
+        // printArray(a2);
+        // System.out.println("Start insertion sort at:" + DateTime.now());
+        // insertion_sort(a2);
+        // System.out.println("Finish insertion sort at:" + DateTime.now());
+        // printArray(a2);
         
-        /* insertion*/
+        /* heap sort*/
         int[] a3=aa.clone();
         printArray(a3);
         System.out.println("Start insertion sort at:" + DateTime.now());
@@ -34,6 +34,24 @@ public class App{
         System.out.println("Finish insertion sort at:" + DateTime.now());
         printArray(a3);
         
+        /* merge sort*/
+        int[] a4=aa.clone();
+        printArray(a4);
+        System.out.println("Start insertion sort at:" + DateTime.now());
+        merge_sort(a4, 0, a4.length - 1);
+        System.out.println("Finish insertion sort at:" + DateTime.now());
+        printArray(a4);
+    }
+    
+    public static void printFullArray(int[] array){
+        System.out.print("{");
+        for (int i = 0; i < array.length; i++) {  
+            System.out.print(array[i]);  
+            if (i < array.length - 1) {  
+                System.out.print(", ");  
+            }  
+        }  
+        System.out.println("}");   
     }
     
     public static void printArray(int[] array) {  
@@ -128,5 +146,73 @@ public class App{
 			heapify(a, i, 0);
 		}
 	}
+    
+    public static void merge_sort(int s[], int l, int r){
+        // int i = 0;
+        // while (i + 10 < s.length){
+            // merge_sort_sub(s, i, i+10);
+            // i = i + 10;
+        // }
+        // merge_sort_sub(s, i, s.length);
+        
+        
+        if( r-l >20){
+            merge_sort(s, l, Math.round((l + r)/2));
+            merge_sort(s, Math.round((l + r)/2) + 1, r);
+            merge_sort_merge(s, l, r);
+        }else{
+            merge_sort_sub(s, l, r);
+        }
+    }
+    
+    public static void merge_sort_sub(int s[], int l, int r){
+        int temp;
+        for (int i = l; i <= r; i++){
+            for (int j=i; j>l; j--){
+                if (s[j]> s[j-1]){
+                    temp = s[j];
+                    s[j] = s[j-1];
+                    s[j-1] = temp;
+                }
+            }
+        }
+    }
+    
+    public static void merge_sort_merge(int s[], int l, int r){
+        int[] t = new int[r-l+1];
+        /* Build result array t*/
+        int i = l;
+        int j = Math.round((l + r)/2) + 1;
+        int k = 0;
+        while( (k<=r-l) && (i <= Math.round(( l + r ) / 2 ) ) && ( j <= r ) ){
+            if (s[i]>s[j]){
+                t[k]=s[i];
+                i++;
+            }else{
+                t[k]=s[j];
+                j++;
+            }
+            k++;
+        }
+        if ( i > Math.round(( l + r ) / 2 ) ){
+            while( j <= r ){
+                t[k] = s[j];
+                j++;
+                k++;
+            }
+        }
+        if ( j > r ){
+            while(i <= Math.round(( l + r ) / 2 ) ){
+                t[k] = s[i];
+                i++;
+                k++;
+            }
+        }
+        /* Copy back to array s*/
+        for (k = 0; k < r-l+1 ; k++){
+            s[k+l] = t[k];
+        }
+
+    }
 
 }
